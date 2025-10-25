@@ -1,0 +1,67 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+    <div class="col-8 offset-2 mt-3">
+    <h3>List Your Stay ✨</h3>
+    <br>
+    <form method="post" action="/listings" novalidate class="needs-validation">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+             name="listing[title]" 
+             placeholder="Cozy corners deserve a name 🏡" 
+             type="text" 
+             class="form-control" required>
+             <div class="valid-feedback">Nice! That title feels inviting.</div>
+             <div class="invalid-feedback">Title can’t be empty.</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea 
+                name="listing[description]"  
+                placeholder="Tell travelers why your place is unforgettable ✨"
+                class="form-control" required></textarea>
+                <div class="valid-feedback">Perfect — your description makes this place sound amazing</div>
+                <div class="invalid-feedback">Description is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Images</label>
+            <input name="listing[image]" 
+            placeholder="Show off your cozy corners 🪞"  
+            type="text"  
+             class="form-control">
+        </div>
+        
+            <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input name="listing[price]"
+             placeholder="💸 Set your nightly price…"
+              class="form-control" required>
+               <div class="valid-feedback">Price looks good</div>
+               <div class="invalid-feedback">Please set a valid price</div>
+        </div>
+        <div class="row">
+        <div class="mb-3 col-md-5">
+              <label for="country" class="form-label">Country</label>
+             <input name="listing[country]" 
+             placeholder="Enter the country of your wander-home 🌿"  
+             type="text"
+             class="form-control" required>
+              <div class="valid-feedback">Great! Country set.</div>
+              <div class="invalid-feedback">Country field can’t be blank</div>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="location" class="form-label">Location</label>
+             <input name="listing[location]"
+              placeholder="📍 Where can wanderers find this gem?" 
+               type="text"
+               class="form-control" required>
+                <div class="valid-feedback">Got it — location added!</div>
+                <div class="invalid-feedback">Location can’t be empty.</div>
+            </div>
+        </div>
+    <button class="btn btn-dark add-btn mt-2">Add</button>
+    </form>
+    <br><br>
+    </div>
+    </div>
+
