@@ -109,17 +109,23 @@ body {
 
 /* Show Page */
 
-.show-img{
-    height: 30vh;
+.show-img {
+  width: 100%;
+  height: 350px;       
+  object-fit: cover;   /* fills image area without distortion */
+  border-radius: 15px; 
 }
+
 
 .btns{
     display: flex;
 }
 
-.show-card{
-    padding-left: 0;
-    padding-right: 0;
+.show-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .delete-btn{
