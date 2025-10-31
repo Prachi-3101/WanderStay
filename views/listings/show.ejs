@@ -8,6 +8,8 @@
     <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing_image">
     <div class="card-body">
       <p class="card-text">
+     <i><%= listing.owner ? listing.owner.username : "Unknown Owner" %></i>
+        <br>
         <%= listing.description %><br>
         &#8377;<%= listing.price.toLocaleString("en-IN") %><br>
         <%= listing.location %><br>
@@ -15,8 +17,8 @@
       </p>
     </div>
   </div>
-
-  <!-- Buttons aligned with card -->
+  <% if (currentUser && listing.owner && listing.owner._id.equals(currentUser._id)) { %>
+      <!-- Buttons aligned with card -->
   <div class="btns mb-3 mt-3 d-flex justify-content-start gap-2 offset-3">
     <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark  px-3">Edit</a>
    <form method="post" action="/listings/<%= listing._id%>?_method=DELETE" 
@@ -24,6 +26,10 @@
       <button class="btn btn-dark delete-btn px-3">Delete</button>
     </form>
   </div>
+  <% } %>
+  
+
+  <% if (currentUser) { %>
   <div class="col-6 offset-3 mt-4">
   <h3 class="mb-3 text-center">✨ Every story matters! Share your WanderStay experience with us ✨</h3>
 
@@ -43,6 +49,13 @@
       🌿 Leave a Review
     </button>
   </form>
+  </div>
+  <% } else { %>
+     <div class="col-6 offset-3 mt-4 text-center">
+    <h5 class="mb-3">Want to share your WanderStay experience?</h5>
+    <a href="/login" class="btn btn-outline-dark">Log in to leave a review 🌟</a>
+  </div>
+<% } %>
  <hr class="my-4" />
 
 <h3 class="text-center mb-4">🌟 Guest Reviews</h3>
@@ -61,7 +74,8 @@
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h6 class="fw-semibold mb-0">
-              <i class="bi bi-person-circle me-1"></i> Prachi
+              <i class="bi bi-person-circle me-1"></i> 
+              <%= review.author ? review.author.username : "Anonymous" %>
             </h6>
             <span class="text-warning fw-bold">
               <%= '⭐'.repeat(review.rating) %>
@@ -72,9 +86,11 @@
             <i class="bi bi-calendar-event me-1"></i>
             <%= review.createdAt ? review.createdAt.toLocaleDateString('en-IN') : '' %>
           </p>
+          <% if(currentUser && review.author && review.author._id.equals(currentUser._id)) { %>
           <form class="mb-3 mt-2" method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
         <button class="btn btn-sm btn-dark">Delete Review</button>
       </form>
+       <% } %>
         </div>
       </div>
       </div>
