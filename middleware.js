@@ -33,15 +33,15 @@ module.exports.isOwner =async (req,res,next)=>{
 
 module.exports.isReviewAuthor = async(req,res,next) =>{
   const{id,reviewId} = req.params;
-  const review = await review.findById(reviewId);
+  const review = await Review.findById(reviewId);
 
   if(!review){
     req.flash("error","Review not found!");
     return res.redirect(`listings/${id}`);
   }
-  if(!review.author.equals(res.locals.currentUser._id)){
+   if (!review.author || review.author.toString() !== res.locals.currentUser._id.toString()) {
     req.flash("error","Access Denied — you cannot delete someone else's review.");
-    return res.redirect(`listings/${id}`);
+    return res.redirect(`/listings/${id}`);
   }
   next();
 };

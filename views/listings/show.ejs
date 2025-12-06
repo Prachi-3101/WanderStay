@@ -5,7 +5,7 @@
   </div>
 
   <div class="card col-5 offset-3 mt-2 show-card listing-card">
-    <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing_image">
+    <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
     <div class="card-body">
       <p class="card-text">
      <i><%= listing.owner ? listing.owner.username : "Unknown Owner" %></i>
@@ -35,8 +35,29 @@
 
   <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
     <div class=" review-section mb-3">
-      <label for="rating" class="form-label fw-semibold">Rating</label>
-      <input type="range" class="form-range" id="rating" min="1" max="5" name="review[rating]">
+      <div class="review-section mb-3">
+  <label class="form-label fw-semibold d-block">Rating</label>
+
+  <div class="star-widget" data-item-id="<%= listing._id %>">
+    <input type="radio" id="star5-<%= listing._id %>" name="review[rating]" value="5" />
+    <label for="star5-<%= listing._id %>" title="5 stars">★</label>
+
+    <input type="radio" id="star4-<%= listing._id %>" name="review[rating]" value="4" />
+    <label for="star4-<%= listing._id %>" title="4 stars">★</label>
+
+    <input type="radio" id="star3-<%= listing._id %>" name="review[rating]" value="3"  />
+    <label for="star3-<%= listing._id %>" title="3 stars">★</label>
+
+    <input type="radio" id="star2-<%= listing._id %>" name="review[rating]" value="2" />
+    <label for="star2-<%= listing._id %>" title="2 stars">★</label>
+
+    <input type="radio" id="star1-<%= listing._id %>" name="review[rating]" value="1" />
+    <label for="star1-<%= listing._id %>" title="1 star">★</label>
+  </div>
+
+  <div class="form-text small text-muted">Tap a star to rate (1–5)</div>
+</div>
+
     </div>
 
     <div class="mb-3">
@@ -68,7 +89,7 @@
   <% } else { %>
     <div class="row justify-content-center">
       <div class="row">
-    <% for (review of listing.reviews) { %>
+    <% for (let review of listing.reviews) { %>
         <div class="col-md-6 mb-4">
         <div class="card h-100 border-0 shadow-sm review-card">
         <div class="card-body">

@@ -32,6 +32,54 @@ body {
   color: white;
 }
 
+/*  STAR RATING WIDGET */
+
+.star-widget {
+  display: inline-flex;
+  flex-direction: row-reverse; 
+  gap: 6px;
+  align-items: center;
+  font-size: 24px;          /* star size */
+  user-select: none;
+}
+
+/* Hide native radio inputs */
+.star-widget input[type="radio"] {
+  display: none;
+}
+
+/* Base star appearance */
+.star-widget label {
+  cursor: pointer;
+  color: #ccc;              /* inactive star color */
+  opacity: 0.7;
+  transition: color .15s ease, transform .12s ease, opacity .15s ease;
+  font-size: 26px;
+}
+
+/* Hover effect: star + all to its left turn yellow */
+.star-widget label:hover,
+.star-widget label:hover ~ label {
+  color: #FFD700;           /* yellow */
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Selected stars stay yellow */
+.star-widget input:checked ~ label,
+.star-widget input:checked ~ label ~ label {
+  color: #FFD700;           /* yellow */
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Hint text style (optional but cute) */
+.review-section .form-text {
+  margin-top: 4px;
+  color: #666;
+}
+
+
 /* Fixed transparent navbar with blur */
 .custom-navbar {
   background-color: rgba(255, 255, 255, 0.85); /* translucent white */
