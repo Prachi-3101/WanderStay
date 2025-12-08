@@ -244,6 +244,11 @@ body {
   border-radius: 8px;
 }
 
+.review-title {
+  margin-top: 30px;
+}
+
+
 .card {
   background-color: #fff;
   border-radius: 1rem;
@@ -269,3 +274,20 @@ h2 {
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.5px;
 }
+
+#map {
+  width: 100%;
+  height: 350px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  margin-top: 10px;
+}
+
+/* Hover glow effect */
+#map:hover {
+  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+  transition: 0.3s ease;
+}
+
+

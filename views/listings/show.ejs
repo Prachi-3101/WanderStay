@@ -1,10 +1,18 @@
 <% layout("/layouts/boilerplate") %>
+<script>
+  const coordinates = <%- JSON.stringify(listing.geometry ? listing.geometry.coordinates : null) %>;
+   const listingTitle = `<%= listing.title.replace(/"/g, '\\"') %>`;
+
+</script>
+
 <div class="row">
   <div class="col-8 offset-3 mt-3">
     <h3><%= listing.title %></h3>
   </div>
 
-  <div class="card col-5 offset-3 mt-2 show-card listing-card">
+  <div class="card col-8 offset-2 mt-2 show-card listing-card">
+
+
     <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
     <div class="card-body">
       <p class="card-text">
@@ -31,7 +39,7 @@
 
   <% if (currentUser) { %>
   <div class="col-6 offset-3 mt-4">
-  <h3 class="mb-3 text-center">✨ Every story matters! Share your WanderStay experience with us ✨</h3>
+  <h3 class="mb-3 story-heading">✨ Every story matters! Share your WanderStay experience with us ✨</h3>
 
   <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
     <div class=" review-section mb-3">
@@ -74,12 +82,14 @@
   <% } else { %>
      <div class="col-6 offset-3 mt-4 text-center">
     <h5 class="mb-3">Want to share your WanderStay experience?</h5>
-    <a href="/login" class="btn btn-outline-dark">Log in to leave a review 🌟</a>
+    <a href="/login" class="btn btn-outline-dark px-4 mb-4">Log in to leave a review 🌟</a>
   </div>
 <% } %>
- <hr class="my-4" />
+ 
 
-<h3 class="text-center mb-4">🌟 Guest Reviews</h3>
+<div class="col-6 offset-3">
+  <h3 class="mb-4 review-title">🌟 Guest Reviews</h3>
+</div>
 
 <div class="col-8 offset-2">
   <% if (listing.reviews.length === 0) { %>
@@ -119,5 +129,12 @@
     </div>
   <% } %>
 </div>
-  </div>
+<hr class="my-4" />
+<div class="col-8 offset-3 mb-3">
+<h3 class="mb-3">Where you'll be</h3>
+<div id="map"></div>
 </div>
+</div>
+</div>
+
+<script src="/js/map.js"></script>

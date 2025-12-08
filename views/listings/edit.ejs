@@ -3,7 +3,7 @@
   <div class="col-8 offset-2 mt-3">
     <h3>Update Your Stay ✨</h3>
     <br>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
       <div class="mb-3">
          <label for="title" class="form-label">Title</label>
          <input name="listing[title]" 
@@ -21,11 +21,10 @@
                 <div class="invalid-feedback">Description is required.</div>
        </div>
         <div class="mb-3">
-          <label for="image" class="form-label">Images</label>
+          <label for="image" class="form-label">Update Listing Photos</label>
       <input name="listing[image]" 
-      value="<%= listing.image %>" 
-      type="text" 
-      class="form-control" required/>
+      type="file" 
+      class="form-control"/>
       <div class="valid-feedback">Perfect! That photo looks great.</div>
                 <div class="invalid-feedback">Please upload at least one image.</div>
      </div>
