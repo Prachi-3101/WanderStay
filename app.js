@@ -10,6 +10,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const expressError = require("./utils/expressError.js");
 const session = require("express-session");
+const rawMongoStore = require('connect-mongo');
+const MongoStore = rawMongoStore.default || rawMongoStore; 
 const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local");
@@ -21,7 +23,8 @@ const listingRoute= require("./routes/listing.js")
 const reviewRoute = require("./routes/review.js");
 const userRoute = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderStay";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderStay";
+const dbUrl = process.env.ATLASDB_URL;
 
 main().then(()=>{
     console.log("connected to DataBase");
@@ -29,7 +32,7 @@ main().then(()=>{
     console.log(err);
 });
 async function main() {
-    await mongoose.connect (MONGO_URL) ; 
+    await mongoose.connect (dbUrl) ; 
 }
 
 app.set("view engine","ejs");
@@ -39,7 +42,20 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname,"/public")));
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: "mysupersecretcode"
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error",(err)=>{
+    console.log("ERROR in MONGO SESSION STORE",err);
+});
+
 const sessionOptions = {
+    store,
     secret: "mysupersecretcode",
     resave: false,
     saveUninitialized: true,
@@ -49,7 +65,6 @@ const sessionOptions = {
         httpOnly: true,
     },
 };
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -68,18 +83,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get("/demoUser",async(req,res)=>{
-//     let fakeUser = new User({
-//         email: "student@gmail.com",
-//         username: "psoni2245"
-//     });
-//     let registeredUser = await User.register(fakeUser,"helloworld");
-//     res.send(registeredUser);
-// });
-
 // app.get("/",(req,res)=>{
 //     res.send("Helloo!!");
 // });
+
+
 
 app.use("/listings",listingRoute);
 app.use("/listings/:id/reviews",reviewRoute);
