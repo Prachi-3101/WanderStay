@@ -290,4 +290,110 @@ h2 {
   transition: 0.3s ease;
 }
 
+/* Filter */
+.categories-scroll { 
+  overflow-x: auto; 
+  white-space: nowrap; 
+  padding: 12px 0; 
+}
+.categories-scroll::-webkit-scrollbar { display: none; }
+
+/* anchors as tiles */
+.category-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;               /* tile width */
+  padding: 6px 8px;
+  margin: 0 6px;
+  text-decoration: none;      /* remove underline */
+  color: #7a7a7a;             /* muted grey */
+  transition: transform .12s ease, color .12s ease;
+  border-bottom: 3px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* icon size + spacing */
+.category-item i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  display: block;
+  line-height: 1;
+  color: inherit;             /* inherits text color */
+}
+
+/* label styling */
+.category-item .small {       
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+/* hover + active */
+.category-item:hover {
+  transform: translateY(-4px);
+  color: #111;
+}
+.category-item.active,
+.category-item[aria-pressed="true"] {
+  color: #111;
+  border-bottom-color: #111;
+}
+
+/* focus for keyboard users */
+.category-item:focus-visible {
+  outline: 3px solid rgba(0,123,255,0.18);
+  outline-offset: 3px;
+  color: #111;
+}
+
+/* small screens: smaller tiles */
+@media (max-width: 576px) {
+  .category-item { width: 92px; margin: 0 8px; }
+  .category-item i { font-size: 20px; }
+}
+
+/* SEARCH BAR CLEAN DESIGN */
+.search-bar {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  padding: 4px 10px;
+  height: 34px;
+  margin-right: 15px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 0.85rem;
+  padding-left: 6px;
+  width: 150px;
+}
+
+.search-btn {
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  padding: 0 6px;
+  border-radius: 50px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.search-btn:hover {
+  color: #ff385c;
+  cursor: pointer;
+}
+
+/* Remove outline on focus */
+.search-input:focus {
+  box-shadow: none;
+}
+
+
+
+
 

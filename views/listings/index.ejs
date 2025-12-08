@@ -1,12 +1,45 @@
 <% layout("/layouts/boilerplate") %>
 <br>
-    <h3>Discover Stays ✨</h3>
+    <!-- <h3>Discover Stays ✨</h3> -->
     <!-- <form method="get" action="/listings/new">
         <button>Create New Listing</button>
     </form> -->
-    <br>
+ 
+<div class="container mt-3">
+  <div class="categories-scroll d-flex align-items-center gap-4">
+    <% const iconCats = [
+      {slug:'amazing-pools', icon:'fa-solid fa-water-ladder', label:'Amazing Pools'},
+      {slug:'beachfront', icon:'fa-solid fa-umbrella-beach', label:'Beachfront'},
+      {slug:'cabins', icon:'fa-solid fa-campground', label:'Cabins'},
+      {slug:'treehouses', icon:'fa-solid fa-tree', label:'Treehouses'},
+      {slug:'iconic-cities', icon:'fa-solid fa-city', label:'Iconic Cities'},
+      {slug:'mountains', icon:'fa-solid fa-mountain', label:'Mountains'},
+      {slug:'skiing', icon:'fa-solid fa-snowflake', label:'Skiing'},
+      {slug:'lakefront', icon:'fa-solid fa-sailboat', label:'Lakefront'},
+      {slug:'omg', icon:'fa-solid fa-star', label:'OMG!'}
+    ]; %>
+
+
+        <a href="/listings"
+        class="text-center category-item <%= currentCategory === 'anywhere' ? 'active' : '' %>">
+        <i class="fa-solid fa-house-chimney fa-lg d-block mb-1"></i>
+        <span class="small">All</span>
+        </a>
+
+
+    <% iconCats.forEach(c => { %>
+      <a href="/listings?category=<%= c.slug %>" 
+         class="text-center category-item <%= currentCategory === c.slug ? 'active' : '' %>">
+        <i class="<%= c.icon %> fa-lg d-block mb-1"></i>
+        <span class="small"><%= c.label %></span>
+      </a>
+    <% }) %>
+  </div>
+</div>
+
+
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-             <% for(let listing of allListings){ %>
+             <% for(let listing of listings){ %>
                 <a href = "/listings/<%= listing._id %>" class="listing-Link">
                     <div class="card col listing-card">
                     <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem">

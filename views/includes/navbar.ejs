@@ -1,16 +1,30 @@
 <nav class="navbar navbar-expand-md fixed-top custom-navbar">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-solid fa-mountain-city"></i></a>
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-mountain-city"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link"  href="/">Home</a>
-        <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new">Add New Listing</a>
+        <a class="nav-link" href="/listings">Explore</a>
       </div>
+      <div class="navbar-nav ms-auto">
+      <form class="search-bar d-flex align-items-center" action="/listings" method="GET">
+  <input
+    name="location"
+    value="<%= typeof currentLocation !== 'undefined' ? currentLocation : '' %>"
+    class="search-input"
+    type="search"
+    placeholder="Search by location..."
+  >
+  <button class="search-btn" type="submit">
+    <i class="fa-solid fa-magnifying-glass me-1"></i> Search
+  </button>
+</form>
+
+</div>
       <div class="navbar-nav ms-auto align-items-center">
+         <a class="nav-link" href="/listings/new">Become a host</a>
               <% if (!currentUser) { %>
           <a class="nav-link text-dark me-2 fw-semibold" href="/login">Login</a>
           <a class="btn btn-outline-dark rounded-pill px-3 fw-semibold" href="/signup">Sign Up</a>
